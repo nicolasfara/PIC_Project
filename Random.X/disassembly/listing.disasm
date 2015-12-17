@@ -1,0 +1,840 @@
+Disassembly Listing for Random
+Generated From:
+/Users/nicolasfarabegoli/MPLABXProjects/Random.X/dist/default/production/Random.X.production.elf
+22-nov-2015 9.57.36
+
+---  /Users/nicolasfarabegoli/MPLABXProjects/Random.X/mcc_generated_files/tmr0.c  -----------------------
+1:             /**
+2:               TMR0 Generated Driver File
+3:             
+4:               @Company
+5:                 Microchip Technology Inc.
+6:             
+7:               @File Name
+8:                 tmr0.c
+9:             
+10:              @Summary
+11:                This is the generated driver implementation file for the TMR0 driver using MPLAB® Code Configurator
+12:            
+13:              @Description
+14:                This source file provides APIs for TMR0.
+15:                Generation Information :
+16:                    Product Revision  :  MPLAB® Code Configurator - v2.25.2
+17:                    Device            :  PIC16F1826
+18:                    Driver Version    :  2.00
+19:                The generated drivers are tested against the following:
+20:                    Compiler          :  XC8 v1.34
+21:                    MPLAB             :  MPLAB X v2.35 or v3.00
+22:             */
+23:            
+24:            /*
+25:            Copyright (c) 2013 - 2015 released Microchip Technology Inc.  All rights reserved.
+26:            
+27:            Microchip licenses to you the right to use, modify, copy and distribute
+28:            Software only when embedded on a Microchip microcontroller or digital signal
+29:            controller that is integrated into your product or third party product
+30:            (pursuant to the sublicense terms in the accompanying license agreement).
+31:            
+32:            You should refer to the license agreement accompanying this Software for
+33:            additional information regarding your rights and obligations.
+34:            
+35:            SOFTWARE AND DOCUMENTATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND,
+36:            EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION, ANY WARRANTY OF
+37:            MERCHANTABILITY, TITLE, NON-INFRINGEMENT AND FITNESS FOR A PARTICULAR PURPOSE.
+38:            IN NO EVENT SHALL MICROCHIP OR ITS LICENSORS BE LIABLE OR OBLIGATED UNDER
+39:            CONTRACT, NEGLIGENCE, STRICT LIABILITY, CONTRIBUTION, BREACH OF WARRANTY, OR
+40:            OTHER LEGAL EQUITABLE THEORY ANY DIRECT OR INDIRECT DAMAGES OR EXPENSES
+41:            INCLUDING BUT NOT LIMITED TO ANY INCIDENTAL, SPECIAL, INDIRECT, PUNITIVE OR
+42:            CONSEQUENTIAL DAMAGES, LOST PROFITS OR LOST DATA, COST OF PROCUREMENT OF
+43:            SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
+44:            (INCLUDING BUT NOT LIMITED TO ANY DEFENSE THEREOF), OR OTHER SIMILAR COSTS.
+45:             */
+46:            
+47:            /**
+48:              Section: Included Files
+49:             */
+50:            
+51:            #include <xc.h>
+52:            #include "tmr0.h"
+53:            
+54:            /**
+55:              Section: Global Variables Definitions
+56:             */
+57:            
+58:            volatile uint8_t timer0ReloadVal;
+59:            
+60:            /**
+61:              Section: TMR0 APIs
+62:             */
+63:            
+64:            void TMR0_Initialize(void) {
+65:                // Set TMR0 to the options selected in the User Interface
+66:            
+67:                // PSA not_assigned; PS 1:256; TMRSE Increment_hi_lo; mask the nWPUEN and INTEDG bits
+68:                OPTION_REG = (OPTION_REG & 0xC0) | 0xDF & 0x3F;
+0139  0021     MOVLB 0x1
+013A  0815     MOVF OPTION_REG, W
+013B  39C0     ANDLW 0xC0
+013C  381F     IORLW 0x1F
+013D  0095     MOVWF OPTION_REG
+69:            
+70:                // TMR0 131; 
+71:                TMR0 = 0x83;
+013E  3083     MOVLW 0x83
+013F  0020     MOVLB 0x0
+0140  0095     MOVWF TMR0
+72:            
+73:                // Load the TMR value to reload variable
+74:                timer0ReloadVal = 131;
+0141  3083     MOVLW 0x83
+0142  00F1     MOVWF divisor
+0143  0871     MOVF divisor, W
+0144  00B6     MOVWF timer0ReloadVal
+75:            
+76:                // Clear Interrupt flag before enabling the interrupt
+77:                INTCONbits.TMR0IF = 0;
+0145  110B     BCF INTCON, 0x2
+78:            
+79:                // Enabling TMR0 interrupt
+80:                INTCONbits.TMR0IE = 1;
+0146  168B     BSF INTCON, 0x5
+81:            }
+0147  0008     RETURN
+82:            
+83:            uint8_t TMR0_ReadTimer(void) {
+84:                uint8_t readVal;
+85:            
+86:                readVal = TMR0;
+0148  0020     MOVLB 0x0
+0149  0815     MOVF TMR0, W
+014A  00F1     MOVWF divisor
+014B  0871     MOVF divisor, W
+014C  00F2     MOVWF readVal
+87:            
+88:                return readVal;
+014D  0872     MOVF readVal, W
+89:            }
+90:            
+91:            void TMR0_WriteTimer(uint8_t timerVal) {
+92:                // Write to the Timer0 register
+93:                TMR0 = timerVal;
+94:            }
+95:            
+96:            void TMR0_Reload(void) {
+97:                // Write to the Timer0 register
+98:                TMR0 = timer0ReloadVal;
+99:            }
+100:           
+101:           void TMR0_ISR(void) {
+102:           
+103:               // clear the TMR0 interrupt flag
+104:               INTCONbits.TMR0IF = 0;
+015B  110B     BCF INTCON, 0x2
+105:           
+106:               TMR0 = timer0ReloadVal;
+015C  0020     MOVLB 0x0
+015D  0836     MOVF timer0ReloadVal, W
+015E  0095     MOVWF TMR0
+107:           
+108:           
+109:               // add your TMR0 interrupt custom code
+110:           }
+015F  0008     RETURN
+111:           
+112:           /**
+113:             End of File
+114:            */
+---  /Users/nicolasfarabegoli/MPLABXProjects/Random.X/mcc_generated_files/pin_manager.c  ----------------
+1:             /**
+2:               Generated Pin Manager File
+3:             
+4:               Company:
+5:                 Microchip Technology Inc.
+6:             
+7:               File Name:
+8:                 pin_manager.c
+9:             
+10:              Summary:
+11:                This is the Pin Manager file generated using MPLAB® Code Configurator
+12:            
+13:              Description:
+14:                This header file provides implementations for pin APIs for all pins selected in the GUI.
+15:                Generation Information :
+16:                    Product Revision  :  MPLAB® Code Configurator - v2.25.2
+17:                    Device            :  PIC16F1826
+18:                    Driver Version    :  1.02
+19:                The generated drivers are tested against the following:
+20:                    Compiler          :  XC8 v1.34
+21:                    MPLAB             :  MPLAB X v2.35 or v3.00
+22:             */
+23:            
+24:            /*
+25:            Copyright (c) 2013 - 2015 released Microchip Technology Inc.  All rights reserved.
+26:            
+27:            Microchip licenses to you the right to use, modify, copy and distribute
+28:            Software only when embedded on a Microchip microcontroller or digital signal
+29:            controller that is integrated into your product or third party product
+30:            (pursuant to the sublicense terms in the accompanying license agreement).
+31:            
+32:            You should refer to the license agreement accompanying this Software for
+33:            additional information regarding your rights and obligations.
+34:            
+35:            SOFTWARE AND DOCUMENTATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND,
+36:            EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION, ANY WARRANTY OF
+37:            MERCHANTABILITY, TITLE, NON-INFRINGEMENT AND FITNESS FOR A PARTICULAR PURPOSE.
+38:            IN NO EVENT SHALL MICROCHIP OR ITS LICENSORS BE LIABLE OR OBLIGATED UNDER
+39:            CONTRACT, NEGLIGENCE, STRICT LIABILITY, CONTRIBUTION, BREACH OF WARRANTY, OR
+40:            OTHER LEGAL EQUITABLE THEORY ANY DIRECT OR INDIRECT DAMAGES OR EXPENSES
+41:            INCLUDING BUT NOT LIMITED TO ANY INCIDENTAL, SPECIAL, INDIRECT, PUNITIVE OR
+42:            CONSEQUENTIAL DAMAGES, LOST PROFITS OR LOST DATA, COST OF PROCUREMENT OF
+43:            SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
+44:            (INCLUDING BUT NOT LIMITED TO ANY DEFENSE THEREOF), OR OTHER SIMILAR COSTS.
+45:             */
+46:            
+47:            #include <xc.h>
+48:            #include "pin_manager.h"
+49:            
+50:            void PIN_MANAGER_Initialize(void) {
+51:                LATA = 0x00;
+0111  0022     MOVLB 0x2
+0112  018C     CLRF LATA
+52:                TRISA = 0xE7;
+0113  30E7     MOVLW 0xE7
+0114  0021     MOVLB 0x1
+0115  008C     MOVWF TRISA
+53:                ANSELA = 0x03;
+0116  3003     MOVLW 0x3
+0117  0023     MOVLB 0x3
+0118  008C     MOVWF ANSELA
+54:                WPUA = 0x00;
+0119  0024     MOVLB 0x4
+011A  018C     CLRF WPUA
+55:            
+56:                LATB = 0x00;
+011B  0022     MOVLB 0x2
+011C  018D     CLRF LATB
+57:                TRISB = 0x00;
+011D  0021     MOVLB 0x1
+011E  018D     CLRF TRISB
+58:                ANSELB = 0x00;
+011F  0023     MOVLB 0x3
+0120  018D     CLRF ANSELB
+59:                WPUB = 0x00;
+0121  0024     MOVLB 0x4
+0122  018D     CLRF WPUB
+60:            
+61:                OPTION_REGbits.nWPUEN = 0x01;
+0123  0021     MOVLB 0x1
+0124  1795     BSF OPTION_REG, 0x7
+62:            
+63:                APFCON0 = 0x00;
+0125  0022     MOVLB 0x2
+0126  019D     CLRF APFCON0
+64:            
+65:                APFCON1 = 0x00;
+0127  019E     CLRF APFCON1
+66:            
+67:            
+68:            }
+0128  0008     RETURN
+69:            /**
+70:             End of File
+71:             */
+---  /Users/nicolasfarabegoli/MPLABXProjects/Random.X/mcc_generated_files/mcc.c  ------------------------
+1:             /**
+2:               @Generated MPLAB® Code Configurator Source File
+3:             
+4:               @Company:
+5:                 Microchip Technology Inc.
+6:             
+7:               @File Name:
+8:                 mcc.c
+9:             
+10:              @Summary:
+11:                This is the mcc.c file generated using MPLAB® Code Configurator
+12:            
+13:              @Description:
+14:                This header file provides implementations for driver APIs for all modules selected in the GUI.
+15:                Generation Information :
+16:                    Product Revision  :  MPLAB® Code Configurator - v2.25.2
+17:                    Device            :  PIC16F1826
+18:                    Driver Version    :  1.02
+19:                The generated drivers are tested against the following:
+20:                    Compiler          :  XC8 v1.34
+21:                    MPLAB             :  MPLAB X v2.35 or v3.00
+22:             */
+23:            
+24:            /*
+25:            Copyright (c) 2013 - 2015 released Microchip Technology Inc.  All rights reserved.
+26:            
+27:            Microchip licenses to you the right to use, modify, copy and distribute
+28:            Software only when embedded on a Microchip microcontroller or digital signal
+29:            controller that is integrated into your product or third party product
+30:            (pursuant to the sublicense terms in the accompanying license agreement).
+31:            
+32:            You should refer to the license agreement accompanying this Software for
+33:            additional information regarding your rights and obligations.
+34:            
+35:            SOFTWARE AND DOCUMENTATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND,
+36:            EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION, ANY WARRANTY OF
+37:            MERCHANTABILITY, TITLE, NON-INFRINGEMENT AND FITNESS FOR A PARTICULAR PURPOSE.
+38:            IN NO EVENT SHALL MICROCHIP OR ITS LICENSORS BE LIABLE OR OBLIGATED UNDER
+39:            CONTRACT, NEGLIGENCE, STRICT LIABILITY, CONTRIBUTION, BREACH OF WARRANTY, OR
+40:            OTHER LEGAL EQUITABLE THEORY ANY DIRECT OR INDIRECT DAMAGES OR EXPENSES
+41:            INCLUDING BUT NOT LIMITED TO ANY INCIDENTAL, SPECIAL, INDIRECT, PUNITIVE OR
+42:            CONSEQUENTIAL DAMAGES, LOST PROFITS OR LOST DATA, COST OF PROCUREMENT OF
+43:            SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
+44:            (INCLUDING BUT NOT LIMITED TO ANY DEFENSE THEREOF), OR OTHER SIMILAR COSTS.
+45:             */
+46:            
+47:            // Configuration bits: selected in the GUI
+48:            
+49:            // CONFIG1
+50:            #pragma config CLKOUTEN = OFF    // Clock Out Enable->CLKOUT function is disabled. I/O or oscillator function on the CLKOUT pin
+51:            #pragma config FCMEN = ON    // Fail-Safe Clock Monitor Enable->Fail-Safe Clock Monitor is enabled
+52:            #pragma config MCLRE = ON    // MCLR Pin Function Select->MCLR/VPP pin function is MCLR
+53:            #pragma config WDTE = OFF    // Watchdog Timer Enable->WDT disabled
+54:            #pragma config CPD = OFF    // Data Memory Code Protection->Data memory code protection is disabled
+55:            #pragma config FOSC = INTOSC    // Oscillator Selection->INTOSC oscillator: I/O function on CLKIN pin
+56:            #pragma config BOREN = ON    // Brown-out Reset Enable->Brown-out Reset enabled
+57:            #pragma config IESO = ON    // Internal/External Switchover->Internal/External Switchover mode is enabled
+58:            #pragma config PWRTE = OFF    // Power-up Timer Enable->PWRT disabled
+59:            #pragma config CP = OFF    // Flash Program Memory Code Protection->Program memory code protection is disabled
+60:            
+61:            // CONFIG2
+62:            #pragma config PLLEN = OFF    // PLL Enable->4x PLL disabled
+63:            #pragma config LVP = OFF    // Low-Voltage Programming Enable->High-voltage on MCLR/VPP must be used for programming
+64:            #pragma config WRT = OFF    // Flash Memory Self-Write Protection->Write protection off
+65:            #pragma config STVREN = ON    // Stack Overflow/Underflow Reset Enable->Stack Overflow or Underflow will cause a Reset
+66:            #pragma config BORV = LO    // Brown-out Reset Voltage Selection->Brown-out Reset Voltage (Vbor), low trip point selected.
+67:            
+68:            #include "mcc.h"
+69:            
+70:            void SYSTEM_Initialize(void) {
+71:                OSCILLATOR_Initialize();
+0160  2155     CALL 0x155
+72:                PIN_MANAGER_Initialize();
+0161  2111     CALL 0x111
+73:                TMR0_Initialize();
+0162  2139     CALL 0x139
+74:            }
+0163  0008     RETURN
+75:            
+76:            void OSCILLATOR_Initialize(void) {
+77:                // SCS INTOSC; SPLLEN disabled; IRCF 500KHz_MF; 
+78:                OSCCON = 0x3A;
+0155  303A     MOVLW 0x3A
+0156  0021     MOVLB 0x1
+0157  0099     MOVWF OSCCON
+79:                // LFIOFR disabled; HFIOFL not2percent_acc; OSTS intosc; PLLR disabled; HFIOFS not0.5percent_acc; HFIOFR disabled; MFIOFR disabled; T1OSCR disabled; 
+80:                OSCSTAT = 0x00;
+0158  019A     CLRF OSCSTAT
+81:                // TUN 0x0; 
+82:                OSCTUNE = 0x00;
+0159  0198     CLRF OSCTUNE
+83:                // Set the secondary oscillator
+84:            
+85:            }
+015A  0008     RETURN
+86:            
+87:            /**
+88:             End of File
+89:             */
+---  /Users/nicolasfarabegoli/MPLABXProjects/Random.X/mcc_generated_files/interrupt_manager.c  ----------
+1:             /**
+2:               Generated Interrupt Manager Source File
+3:             
+4:               @Company:
+5:                 Microchip Technology Inc.
+6:             
+7:               @File Name:
+8:                 interrupt_manager.c
+9:             
+10:              @Summary:
+11:                This is the Interrupt Manager file generated using MPLAB® Code Configurator
+12:            
+13:              @Description:
+14:                This header file provides implementations for global interrupt handling.
+15:                For individual peripheral handlers please see the peripheral driver for
+16:                all modules selected in the GUI.
+17:                Generation Information :
+18:                    Product Revision  :  MPLAB® Code Configurator - v2.25.2
+19:                    Device            :  PIC16F1826
+20:                    Driver Version    :  1.02
+21:                The generated drivers are tested against the following:
+22:                    Compiler          :  XC8 v1.34
+23:                    MPLAB             :  MPLAB X v2.35 or v3.00
+24:             */
+25:            
+26:            /*
+27:            Copyright (c) 2013 - 2015 released Microchip Technology Inc.  All rights reserved.
+28:            
+29:            Microchip licenses to you the right to use, modify, copy and distribute
+30:            Software only when embedded on a Microchip microcontroller or digital signal
+31:            controller that is integrated into your product or third party product
+32:            (pursuant to the sublicense terms in the accompanying license agreement).
+33:            
+34:            You should refer to the license agreement accompanying this Software for
+35:            additional information regarding your rights and obligations.
+36:            
+37:            SOFTWARE AND DOCUMENTATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND,
+38:            EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION, ANY WARRANTY OF
+39:            MERCHANTABILITY, TITLE, NON-INFRINGEMENT AND FITNESS FOR A PARTICULAR PURPOSE.
+40:            IN NO EVENT SHALL MICROCHIP OR ITS LICENSORS BE LIABLE OR OBLIGATED UNDER
+41:            CONTRACT, NEGLIGENCE, STRICT LIABILITY, CONTRIBUTION, BREACH OF WARRANTY, OR
+42:            OTHER LEGAL EQUITABLE THEORY ANY DIRECT OR INDIRECT DAMAGES OR EXPENSES
+43:            INCLUDING BUT NOT LIMITED TO ANY INCIDENTAL, SPECIAL, INDIRECT, PUNITIVE OR
+44:            CONSEQUENTIAL DAMAGES, LOST PROFITS OR LOST DATA, COST OF PROCUREMENT OF
+45:            SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
+46:            (INCLUDING BUT NOT LIMITED TO ANY DEFENSE THEREOF), OR OTHER SIMILAR COSTS.
+47:             */
+48:            
+49:            #include "interrupt_manager.h"
+50:            #include "mcc.h"
+51:            
+52:            void interrupt INTERRUPT_InterruptManager(void) {
+0004  147E     BSF 0xFE, 0x0
+0005  3180     MOVLP 0x0
+0006  0020     MOVLB 0x0
+0007  087F     MOVF 0x7F, W
+0008  00F0     MOVWF __pcstackCOMMON
+53:                // interrupt handler
+54:                if (INTCONbits.TMR0IE == 1 && INTCONbits.TMR0IF == 1) {
+0009  1A8B     BTFSC INTCON, 0x5
+000A  1D0B     BTFSS INTCON, 0x2
+000B  280D     GOTO 0xD
+55:                    TMR0_ISR();
+000C  215B     CALL 0x15B
+56:                } else {
+57:                    //Unhandled Interrupt
+58:                }
+59:            }
+000D  0870     MOVF __pcstackCOMMON, W
+60:            /**
+61:             End of File
+62:             */
+---  /Users/nicolasfarabegoli/MPLABXProjects/Random.X/main.c  -------------------------------------------
+1:             /**
+2:               Generated Main Source File
+3:             
+4:               Company:
+5:                 Microchip Technology Inc.
+6:             
+7:               File Name:
+8:                 main.c
+9:             
+10:              Summary:
+11:                This is the main file generated using MPLAB® Code Configurator
+12:            
+13:              Description:
+14:                This header file provides implementations for driver APIs for all modules selected in the GUI.
+15:                Generation Information :
+16:                    Product Revision  :  MPLAB® Code Configurator - v2.25.2
+17:                    Device            :  PIC16F1826
+18:                    Driver Version    :  2.00
+19:                The generated drivers are tested against the following:
+20:                    Compiler          :  XC8 v1.34
+21:                    MPLAB             :  MPLAB X v2.35 or v3.00
+22:             */
+23:            
+24:            /*
+25:            Copyright (c) 2013 - 2015 released Microchip Technology Inc.  All rights reserved.
+26:            
+27:            Microchip licenses to you the right to use, modify, copy and distribute
+28:            Software only when embedded on a Microchip microcontroller or digital signal
+29:            controller that is integrated into your product or third party product
+30:            (pursuant to the sublicense terms in the accompanying license agreement).
+31:            
+32:            You should refer to the license agreement accompanying this Software for
+33:            additional information regarding your rights and obligations.
+34:            
+35:            SOFTWARE AND DOCUMENTATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND,
+36:            EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION, ANY WARRANTY OF
+37:            MERCHANTABILITY, TITLE, NON-INFRINGEMENT AND FITNESS FOR A PARTICULAR PURPOSE.
+38:            IN NO EVENT SHALL MICROCHIP OR ITS LICENSORS BE LIABLE OR OBLIGATED UNDER
+39:            CONTRACT, NEGLIGENCE, STRICT LIABILITY, CONTRIBUTION, BREACH OF WARRANTY, OR
+40:            OTHER LEGAL EQUITABLE THEORY ANY DIRECT OR INDIRECT DAMAGES OR EXPENSES
+41:            INCLUDING BUT NOT LIMITED TO ANY INCIDENTAL, SPECIAL, INDIRECT, PUNITIVE OR
+42:            CONSEQUENTIAL DAMAGES, LOST PROFITS OR LOST DATA, COST OF PROCUREMENT OF
+43:            SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
+44:            (INCLUDING BUT NOT LIMITED TO ANY DEFENSE THEREOF), OR OTHER SIMILAR COSTS.
+45:             */
+46:            
+47:            #include "mcc_generated_files/mcc.h"
+48:            
+49:            #define Display PORTB
+50:            
+51:            /*
+52:                                     Main application
+53:             */
+54:            
+55:            //variabili
+56:            uint8_t Rand = 0, Rand_Disp = 0, Dec = 0, Uni = 0;
+57:            uint8_t LedTable[16] = {63, 6, 91, 79, 102, 109, 125, 7, 127, 111, 119, 124, 57, 94, 121, 113};
+58:            
+59:            void main(void) {
+60:                // initialize the device
+61:                
+62:                SYSTEM_Initialize();
+0024  2160     CALL 0x160
+63:            
+64:                // When using interrupts, you need to set the Global and Peripheral Interrupt Enable bits
+65:                // Use the following macros to:
+66:            
+67:                // Enable the Global Interrupts
+68:                //INTERRUPT_GlobalInterruptEnable();
+69:            
+70:                // Enable the Peripheral Interrupts
+71:                INTERRUPT_PeripheralInterruptEnable();
+0025  170B     BSF INTCON, 0x6
+72:            
+73:                // Disable the Global Interrupts
+74:                //INTERRUPT_GlobalInterruptDisable();
+75:            
+76:                // Disable the Peripheral Interrupts
+77:                //INTERRUPT_PeripheralInterruptDisable();
+78:                
+79:                K1_SetHigh();
+0026  0022     MOVLB 0x2
+0027  158C     BSF LATA, 0x3
+80:                K2_SetLow();
+0028  120C     BCF LATA, 0x4
+81:            
+82:                while (1) {
+007A  2829     GOTO 0x29
+83:                    // Add your application code
+84:                    
+85:                    if(Rand_GetValue()){
+0029  0020     MOVLB 0x0
+002A  1D0C     BTFSS PORTA, 0x2
+002B  2852     GOTO 0x52
+86:                        Rand_Disp = Rand;
+002C  087A     MOVF Rand, W
+002D  00B3     MOVWF __pcstackBANK0
+002E  0833     MOVF __pcstackBANK0, W
+002F  00B1     MOVWF Rand_Disp
+87:                        Uni = Rand_Disp % 10;
+0030  300A     MOVLW 0xA
+0031  00F1     MOVWF divisor
+0032  3000     MOVLW 0x0
+0033  00F2     MOVWF readVal
+0034  0831     MOVF Rand_Disp, W
+0035  00B3     MOVWF __pcstackBANK0
+0036  01B4     CLRF 0x34
+0037  0833     MOVF __pcstackBANK0, W
+0038  00F3     MOVWF dividend
+0039  0834     MOVF 0x34, W
+003A  00F4     MOVWF 0x74
+003B  20CC     CALL 0xCC
+003C  0871     MOVF divisor, W
+003D  0020     MOVLB 0x0
+003E  00B5     MOVWF 0x35
+003F  0835     MOVF 0x35, W
+0040  00B2     MOVWF Uni
+88:                        Dec = Rand_Disp / 10;
+0041  300A     MOVLW 0xA
+0042  00F1     MOVWF divisor
+0043  3000     MOVLW 0x0
+0044  00F2     MOVWF readVal
+0045  0831     MOVF Rand_Disp, W
+0046  00B3     MOVWF __pcstackBANK0
+0047  01B4     CLRF 0x34
+0048  0833     MOVF __pcstackBANK0, W
+0049  00F3     MOVWF dividend
+004A  0834     MOVF 0x34, W
+004B  00F4     MOVWF 0x74
+004C  207B     CALL 0x7B
+004D  0871     MOVF divisor, W
+004E  0020     MOVLB 0x0
+004F  00B5     MOVWF 0x35
+0050  0835     MOVF 0x35, W
+0051  00B0     MOVWF Dec
+89:                    }
+90:                    
+91:                    if(0x00 == TMR0_ReadTimer()){
+0052  2148     CALL 0x148
+0053  3A00     XORLW 0x0
+0054  1D03     BTFSS STATUS, 0x2
+0055  286D     GOTO 0x6D
+92:                        
+93:                        if(!K1_GetValue())
+0056  0020     MOVLB 0x0
+0057  198C     BTFSC PORTA, 0x3
+0058  2863     GOTO 0x63
+94:                        {
+95:                            Display = LedTable[Dec];
+0059  0830     MOVF Dec, W
+005A  3E20     ADDLW 0x20
+005B  0086     MOVWF FSR1
+005C  0187     CLRF FSR1H
+005D  0801     MOVF INDF1, W
+005E  008D     MOVWF PORTB
+96:                            K1_SetHigh();
+005F  0022     MOVLB 0x2
+0060  158C     BSF LATA, 0x3
+97:                            K2_SetLow();
+0061  120C     BCF LATA, 0x4
+98:                        }else {
+0062  286D     GOTO 0x6D
+99:                            
+100:                           Display = LedTable[Uni];
+0063  0020     MOVLB 0x0
+0064  0832     MOVF Uni, W
+0065  3E20     ADDLW 0x20
+0066  0086     MOVWF FSR1
+0067  0187     CLRF FSR1H
+0068  0801     MOVF INDF1, W
+0069  008D     MOVWF PORTB
+101:                           K1_SetLow();
+006A  0022     MOVLB 0x2
+006B  118C     BCF LATA, 0x3
+102:                           K2_SetHigh();
+006C  160C     BSF LATA, 0x4
+103:                       }
+104:                   }
+105:                   
+106:                   
+107:                   if(0x0F == TMR0_ReadTimer()){
+006D  2148     CALL 0x148
+006E  3A0F     XORLW 0xF
+006F  1D03     BTFSS 0x103, 0x2
+0070  2829     GOTO 0x29
+108:                       if(Rand == 30)
+0071  301E     MOVLW 0x1E
+0072  067A     XORWF 0x17A, W
+0073  1903     BTFSC 0x103, 0x2
+109:                           Rand = 0;
+0074  01FA     CLRF 0x17A
+110:                       Rand++;
+0075  3001     MOVLW 0x1
+0076  0020     MOVLB 0x0
+0077  00B3     MOVWF __pcstackBANK0
+0078  0833     MOVF __pcstackBANK0, W
+0079  07FA     ADDWF Rand, F
+111:                   }
+112:               }
+113:           }
+114:           /**
+115:            End of File
+116:            */
+---  /Applications/microchip/xc8/v1.35/sources/common/awmod.c  ------------------------------------------
+1:             // integer signed unsigned modulus
+2:             
+3:             signed int
+4:             #ifdef __PICC__
+5:             #warning TODO: update cgpic and this file to use the other prototype
+6:             __awmod(signed int divisor, signed int dividend)
+7:             #else
+8:             __awmod(signed int dividend, signed int divisor)
+9:             #endif
+10:            {
+11:            	unsigned char	counter, sign;
+12:            
+13:            	sign = 0;
+00CC  01F7     CLRF sign
+14:            	if(dividend < 0) {
+00CD  1FF4     BTFSS 0x74, 0x7
+00CE  28D6     GOTO 0xD6
+15:            		dividend = -dividend;
+00CF  09F3     COMF dividend, F
+00D0  09F4     COMF 0x74, F
+00D1  0AF3     INCF dividend, F
+00D2  1903     BTFSC STATUS, 0x2
+00D3  0AF4     INCF 0x74, F
+16:            		sign = 1;
+00D4  01F7     CLRF sign
+00D5  0AF7     INCF sign, F
+17:            	}
+18:            	if(divisor < 0)
+00D6  1FF2     BTFSS readVal, 0x7
+00D7  28DD     GOTO 0xDD
+19:            		divisor = -divisor;
+00D8  09F1     COMF divisor, F
+00D9  09F2     COMF readVal, F
+00DA  0AF1     INCF divisor, F
+00DB  1903     BTFSC STATUS, 0x2
+00DC  0AF2     INCF readVal, F
+20:            	if(divisor != 0) {
+00DD  0871     MOVF divisor, W
+00DE  0472     IORWF readVal, W
+00DF  1903     BTFSC STATUS, 0x2
+00E0  2904     GOTO 0x104
+21:            		counter = 1;
+00E1  01F6     CLRF counter
+00E2  0AF6     INCF counter, F
+22:            		while(((unsigned int)divisor & 0x8000U) == 0) {
+00E3  1BF2     BTFSC readVal, 0x7
+00E4  28EF     GOTO 0xEF
+00EE  28E3     GOTO 0xE3
+23:            			divisor <<= 1;
+00E5  3001     MOVLW 0x1
+00E6  35F1     LSLF divisor, F
+00E7  0DF2     RLF readVal, F
+00E8  0B89     DECFSZ WREG, F
+00E9  28E6     GOTO 0xE6
+24:            			counter++;
+00EA  3001     MOVLW 0x1
+00EB  00F5     MOVWF 0x75
+00EC  0875     MOVF 0x75, W
+00ED  07F6     ADDWF counter, F
+25:            		}
+26:            		do {
+27:            			if((unsigned int)divisor <= (unsigned int)dividend)
+00EF  0872     MOVF readVal, W
+00F0  0274     SUBWF 0x74, W
+00F1  1D03     BTFSS STATUS, 0x2
+00F2  28F5     GOTO 0xF5
+00F3  0871     MOVF divisor, W
+00F4  0273     SUBWF dividend, W
+00F5  1C03     BTFSS STATUS, 0x0
+00F6  28FB     GOTO 0xFB
+28:            				dividend -= divisor;
+00F7  0871     MOVF divisor, W
+00F8  02F3     SUBWF dividend, F
+00F9  0872     MOVF readVal, W
+00FA  3BF4     SUBWFB 0x74, F
+29:            			*(unsigned int *)&divisor >>= 1;
+00FB  3001     MOVLW 0x1
+00FC  36F2     LSRF readVal, F
+00FD  0CF1     RRF divisor, F
+00FE  0B89     DECFSZ WREG, F
+00FF  28FC     GOTO 0xFC
+30:            		} while(--counter != 0);
+0100  3001     MOVLW 0x1
+0101  02F6     SUBWF counter, F
+0102  1D03     BTFSS STATUS, 0x2
+0103  28EF     GOTO 0xEF
+31:            	}
+32:            	if(sign)
+0104  0877     MOVF sign, W
+0105  1903     BTFSC STATUS, 0x2
+0106  290C     GOTO 0x10C
+33:            		dividend = -dividend;
+0107  09F3     COMF dividend, F
+0108  09F4     COMF 0x74, F
+0109  0AF3     INCF dividend, F
+010A  1903     BTFSC STATUS, 0x2
+010B  0AF4     INCF 0x74, F
+34:            	return dividend;
+010C  0874     MOVF 0x74, W
+35:            }
+---  /Applications/microchip/xc8/v1.35/sources/common/awdiv.c  ------------------------------------------
+1:             // integer signed division
+2:             
+3:             signed int
+4:             #ifdef __PICC__
+5:             #warning TODO: update cgpic and this file to use the other prototype
+6:             __awdiv(signed int divisor, signed int dividend)
+7:             #else
+8:             __awdiv(signed int dividend, signed int divisor)
+9:             #endif
+10:            {
+11:            	signed int	quotient;
+12:            	unsigned char	counter, sign;
+13:            
+14:            	sign = 0;
+007B  01F7     CLRF sign
+15:            	if(divisor < 0) {
+007C  1FF2     BTFSS readVal, 0x7
+007D  2885     GOTO 0x85
+16:            		divisor = -divisor;
+007E  09F1     COMF divisor, F
+007F  09F2     COMF readVal, F
+0080  0AF1     INCF divisor, F
+0081  1903     BTFSC STATUS, 0x2
+0082  0AF2     INCF readVal, F
+17:            		sign = 1;
+0083  01F7     CLRF sign
+0084  0AF7     INCF sign, F
+18:            	}
+19:            	if(dividend < 0) {
+0085  1FF4     BTFSS 0x74, 0x7
+0086  2890     GOTO 0x90
+20:            		dividend = -dividend;
+0087  09F3     COMF dividend, F
+0088  09F4     COMF 0x74, F
+0089  0AF3     INCF dividend, F
+008A  1903     BTFSC STATUS, 0x2
+008B  0AF4     INCF 0x74, F
+21:            		sign ^= 1;
+008C  3001     MOVLW 0x1
+008D  00F5     MOVWF 0x75
+008E  0875     MOVF 0x75, W
+008F  06F7     XORWF sign, F
+22:            	}
+23:            	quotient = 0;
+0090  01F8     CLRF quotient
+0091  01F9     CLRF 0x79
+24:            	if(divisor != 0) {
+0092  0871     MOVF divisor, W
+0093  0472     IORWF readVal, W
+0094  1903     BTFSC STATUS, 0x2
+0095  28BF     GOTO 0xBF
+25:            		counter = 1;
+0096  01F6     CLRF counter
+0097  0AF6     INCF counter, F
+26:            		while((divisor & 0x8000U) == 0) {
+0098  1BF2     BTFSC readVal, 0x7
+0099  28A4     GOTO 0xA4
+00A3  2898     GOTO 0x98
+27:            			divisor <<= 1;
+009A  3001     MOVLW 0x1
+009B  35F1     LSLF divisor, F
+009C  0DF2     RLF readVal, F
+009D  0B89     DECFSZ WREG, F
+009E  289B     GOTO 0x9B
+28:            			counter++;
+009F  3001     MOVLW 0x1
+00A0  00F5     MOVWF 0x75
+00A1  0875     MOVF 0x75, W
+00A2  07F6     ADDWF counter, F
+29:            		}
+30:            		do {
+31:            			quotient <<= 1;
+00A4  3001     MOVLW 0x1
+00A5  35F8     LSLF quotient, F
+00A6  0DF9     RLF 0x79, F
+00A7  0B89     DECFSZ WREG, F
+00A8  28A5     GOTO 0xA5
+32:            			if((unsigned int)divisor <= (unsigned int)dividend) {
+00A9  0872     MOVF readVal, W
+00AA  0274     SUBWF 0x74, W
+00AB  1D03     BTFSS STATUS, 0x2
+00AC  28AF     GOTO 0xAF
+00AD  0871     MOVF divisor, W
+00AE  0273     SUBWF dividend, W
+00AF  1C03     BTFSS STATUS, 0x0
+00B0  28B6     GOTO 0xB6
+33:            				dividend -= divisor;
+00B1  0871     MOVF divisor, W
+00B2  02F3     SUBWF dividend, F
+00B3  0872     MOVF readVal, W
+00B4  3BF4     SUBWFB 0x74, F
+34:            				quotient |= 1;
+00B5  1478     BSF quotient, 0x0
+35:            			}
+36:            			*(unsigned int *)&divisor >>= 1;
+00B6  3001     MOVLW 0x1
+00B7  36F2     LSRF readVal, F
+00B8  0CF1     RRF divisor, F
+00B9  0B89     DECFSZ WREG, F
+00BA  28B7     GOTO 0xB7
+37:            		} while(--counter != 0);
+00BB  3001     MOVLW 0x1
+00BC  02F6     SUBWF counter, F
+00BD  1D03     BTFSS STATUS, 0x2
+00BE  28A4     GOTO 0xA4
+38:            	}
+39:            	if(sign)
+00BF  0877     MOVF sign, W
+00C0  1903     BTFSC STATUS, 0x2
+00C1  28C7     GOTO 0xC7
+40:            		quotient = -quotient;
+00C2  09F8     COMF quotient, F
+00C3  09F9     COMF 0x79, F
+00C4  0AF8     INCF quotient, F
+00C5  1903     BTFSC STATUS, 0x2
+00C6  0AF9     INCF 0x79, F
+41:            	return quotient;
+00C7  0879     MOVF 0x79, W
+42:            }

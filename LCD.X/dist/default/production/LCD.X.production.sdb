@@ -1,0 +1,217 @@
+[p LITE_MODE AUTOSTATIC PIC14 PIC14E ]
+[d version 1.1 ]
+[d edition pro ]
+[d chip 16F1826 ]
+[d frameptr 6 ]
+"6 /Applications/microchip/xc8/v1.35/sources/common/awdiv.c
+[v ___awdiv __awdiv `(i  1 e 2 0 ]
+"6 /Applications/microchip/xc8/v1.35/sources/common/awmod.c
+[v ___awmod __awmod `(i  1 e 2 0 ]
+"62 /Applications/microchip/xc8/v1.35/sources/common/float.c
+[v ___ftpack __ftpack `(f  1 e 3 0 ]
+"86 /Applications/microchip/xc8/v1.35/sources/common/ftadd.c
+[v ___ftadd __ftadd `(f  1 e 3 0 ]
+"6 /Applications/microchip/xc8/v1.35/sources/pic/eeprom.c
+[v _eecpymem eecpymem `(v  1 e 0 0 ]
+"24
+[v _memcpyee memcpyee `(v  1 e 0 0 ]
+"80 /Users/nicolasfarabegoli/MPLABXProjects/LCD.X/lcd_hd44780_pic16.c
+[v _LCDByte LCDByte `(v  1 e 0 0 ]
+"135
+[v _LCDBusyLoop LCDBusyLoop `(v  1 e 0 0 ]
+"193
+[v _LCDInit LCDInit `(v  1 e 0 0 ]
+"251
+[v _LCDWriteString LCDWriteString `(v  1 e 0 0 ]
+"307
+[v _LCDWriteInt LCDWriteInt `(v  1 e 0 0 ]
+"352
+[v _LCDGotoXY LCDGotoXY `(v  1 e 0 0 ]
+"53 /Users/nicolasfarabegoli/MPLABXProjects/LCD.X/main.c
+[v _main main `(v  1 e 0 0 ]
+"70 /Users/nicolasfarabegoli/MPLABXProjects/LCD.X/mcc_generated_files/mcc.c
+[v _SYSTEM_Initialize SYSTEM_Initialize `(v  1 e 0 0 ]
+"75
+[v _OSCILLATOR_Initialize OSCILLATOR_Initialize `(v  1 e 0 0 ]
+"50 /Users/nicolasfarabegoli/MPLABXProjects/LCD.X/mcc_generated_files/pin_manager.c
+[v _PIN_MANAGER_Initialize PIN_MANAGER_Initialize `(v  1 e 0 0 ]
+"475 /Applications/microchip/xc8/v1.35/include/pic16f1826.h
+[v _PORTB PORTB `VEuc  1 e 1 @13 ]
+"1050
+[v _TRISA TRISA `VEuc  1 e 1 @140 ]
+"1111
+[v _TRISB TRISB `VEuc  1 e 1 @141 ]
+[s S125 . 1 `uc 1 TRISB0 1 0 :1:0 
+`uc 1 TRISB1 1 0 :1:1 
+`uc 1 TRISB2 1 0 :1:2 
+`uc 1 TRISB3 1 0 :1:3 
+`uc 1 TRISB4 1 0 :1:4 
+`uc 1 TRISB5 1 0 :1:5 
+`uc 1 TRISB6 1 0 :1:6 
+`uc 1 TRISB7 1 0 :1:7 
+]
+"1128
+[u S134 . 1 `S125 1 . 1 0 ]
+[v _TRISBbits TRISBbits `VES134  1 e 1 @141 ]
+[s S27 . 1 `uc 1 PS0 1 0 :1:0 
+`uc 1 PS1 1 0 :1:1 
+`uc 1 PS2 1 0 :1:2 
+`uc 1 PSA 1 0 :1:3 
+`uc 1 TMR0SE 1 0 :1:4 
+`uc 1 TMR0CS 1 0 :1:5 
+`uc 1 INTEDG 1 0 :1:6 
+`uc 1 nWPUEN 1 0 :1:7 
+]
+"1300
+[s S36 . 1 `uc 1 PS 1 0 :3:0 
+`uc 1 . 1 0 :1:3 
+`uc 1 T0SE 1 0 :1:4 
+`uc 1 T0CS 1 0 :1:5 
+]
+[u S41 . 1 `S27 1 . 1 0 `S36 1 . 1 0 ]
+[v _OPTION_REGbits OPTION_REGbits `VES41  1 e 1 @149 ]
+"1467
+[v _OSCTUNE OSCTUNE `VEuc  1 e 1 @152 ]
+"1524
+[v _OSCCON OSCCON `VEuc  1 e 1 @153 ]
+"1595
+[v _OSCSTAT OSCSTAT `VEuc  1 e 1 @154 ]
+"1850
+[v _LATA LATA `VEuc  1 e 1 @268 ]
+"1906
+[v _LATB LATB `VEuc  1 e 1 @269 ]
+"2577
+[v _APFCON0 APFCON0 `VEuc  1 e 1 @285 ]
+"2627
+[v _APFCON1 APFCON1 `VEuc  1 e 1 @286 ]
+"2646
+[v _ANSELA ANSELA `VEuc  1 e 1 @396 ]
+"2697
+[v _ANSELB ANSELB `VEuc  1 e 1 @397 ]
+"3254
+[v _WPUA WPUA `VEuc  1 e 1 @524 ]
+"3282
+[v _WPUB WPUB `VEuc  1 e 1 @525 ]
+"5695
+[v _RB4 RB4 `VEb  1 e 0 @108 ]
+"5697
+[v _RB5 RB5 `VEb  1 e 0 @109 ]
+"5699
+[v _RB6 RB6 `VEb  1 e 0 @110 ]
+"15 /Users/nicolasfarabegoli/MPLABXProjects/LCD.X/custom_char.h
+[v ___cgram __cgram `[64]uc  1 e 64 0 ]
+"53 /Users/nicolasfarabegoli/MPLABXProjects/LCD.X/main.c
+[v _main main `(v  1 e 0 0 ]
+{
+"85
+} 0
+"70 /Users/nicolasfarabegoli/MPLABXProjects/LCD.X/mcc_generated_files/mcc.c
+[v _SYSTEM_Initialize SYSTEM_Initialize `(v  1 e 0 0 ]
+{
+"73
+} 0
+"50 /Users/nicolasfarabegoli/MPLABXProjects/LCD.X/mcc_generated_files/pin_manager.c
+[v _PIN_MANAGER_Initialize PIN_MANAGER_Initialize `(v  1 e 0 0 ]
+{
+"68
+} 0
+"75 /Users/nicolasfarabegoli/MPLABXProjects/LCD.X/mcc_generated_files/mcc.c
+[v _OSCILLATOR_Initialize OSCILLATOR_Initialize `(v  1 e 0 0 ]
+{
+"84
+} 0
+"251 /Users/nicolasfarabegoli/MPLABXProjects/LCD.X/lcd_hd44780_pic16.c
+[v _LCDWriteString LCDWriteString `(v  1 e 0 0 ]
+{
+"287
+[v LCDWriteString@cc cc `c  1 a 1 1 ]
+"251
+[v LCDWriteString@msg msg `*.25DCCuc  1 p 2 12 ]
+"305
+} 0
+"307
+[v _LCDWriteInt LCDWriteInt `(v  1 e 0 0 ]
+{
+"320
+[v LCDWriteInt@str str `[5]uc  1 a 5 3 ]
+"321
+[v LCDWriteInt@i i `i  1 a 2 10 ]
+[v LCDWriteInt@j j `i  1 a 2 8 ]
+"307
+[v LCDWriteInt@val val `i  1 p 2 0 ]
+[v LCDWriteInt@field_length field_length `c  1 p 1 2 ]
+"308
+[v LCDWriteInt@F2357 F2357 `[5]uc  1 s 5 F2357 ]
+"346
+} 0
+"6 /Applications/microchip/xc8/v1.35/sources/common/awmod.c
+[v ___awmod __awmod `(i  1 e 2 0 ]
+{
+"11
+[v ___awmod@sign sign `uc  1 a 1 6 ]
+[v ___awmod@counter counter `uc  1 a 1 5 ]
+"6
+[v ___awmod@divisor divisor `i  1 p 2 0 ]
+[v ___awmod@dividend dividend `i  1 p 2 2 ]
+"35
+} 0
+"6 /Applications/microchip/xc8/v1.35/sources/common/awdiv.c
+[v ___awdiv __awdiv `(i  1 e 2 0 ]
+{
+"11
+[v ___awdiv@quotient quotient `i  1 a 2 7 ]
+"12
+[v ___awdiv@sign sign `uc  1 a 1 6 ]
+[v ___awdiv@counter counter `uc  1 a 1 5 ]
+"6
+[v ___awdiv@divisor divisor `i  1 p 2 0 ]
+[v ___awdiv@dividend dividend `i  1 p 2 2 ]
+"42
+} 0
+"193 /Users/nicolasfarabegoli/MPLABXProjects/LCD.X/lcd_hd44780_pic16.c
+[v _LCDInit LCDInit `(v  1 e 0 0 ]
+{
+[v LCDInit@style style `uc  1 a 1 wreg ]
+"245
+[v LCDInit@__i __i `uc  1 a 1 1 ]
+"193
+[v LCDInit@style style `uc  1 a 1 wreg ]
+"209
+[v LCDInit@style style `uc  1 a 1 0 ]
+"250
+} 0
+"352
+[v _LCDGotoXY LCDGotoXY `(v  1 e 0 0 ]
+{
+[v LCDGotoXY@x x `uc  1 a 1 wreg ]
+[v LCDGotoXY@x x `uc  1 a 1 wreg ]
+[v LCDGotoXY@y y `uc  1 p 1 12 ]
+"354
+[v LCDGotoXY@x x `uc  1 a 1 0 ]
+"395
+} 0
+"80
+[v _LCDByte LCDByte `(v  1 e 0 0 ]
+{
+[v LCDByte@c c `uc  1 a 1 wreg ]
+"90
+[v LCDByte@temp temp `uc  1 a 1 11 ]
+"89
+[v LCDByte@ln ln `uc  1 a 1 9 ]
+[v LCDByte@hn hn `uc  1 a 1 8 ]
+"80
+[v LCDByte@c c `uc  1 a 1 wreg ]
+[v LCDByte@isdata isdata `uc  1 p 1 5 ]
+"92
+[v LCDByte@c c `uc  1 a 1 10 ]
+"133
+} 0
+"135
+[v _LCDBusyLoop LCDBusyLoop `(v  1 e 0 0 ]
+{
+"139
+[v LCDBusyLoop@status status `uc  1 a 1 4 ]
+[v LCDBusyLoop@temp temp `uc  1 a 1 3 ]
+[v LCDBusyLoop@busy busy `uc  1 a 1 2 ]
+"191
+} 0

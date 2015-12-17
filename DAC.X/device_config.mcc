@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<configuration device="PIC16F1826" mcc_version="v2.25.2">
+    <managers>
+        <manager generated="false" name="Pin Manager" reloadPin="manual">
+            <setting name="P1DSEL" option="RB7"/>
+            <setting name="SS1SEL" option="RB5"/>
+            <setting name="SDO1SEL" option="RB2"/>
+            <setting name="RXDTSEL" option="RB1"/>
+            <setting name="CCP1SEL" option="RB3"/>
+            <setting name="P1CSEL" option="RB6"/>
+            <setting name="TXCKSEL" option="RB2"/>
+            <setting name="package" option="PDIP18"/>
+            <setting name="sorting" option="true"/>
+            <resource customName="DACOUT" digital="false" direction="OUTPUT" function="DACOUT" module="DAC" name="RA2" start="false" type="pin" wpu="false"/>
+            <file checksum="663325276" modified="false" name="pin_manager.c" path="mcc_generated_files/pin_manager.c"/>
+            <file checksum="2441518459" modified="false" name="pin_manager.h" path="mcc_generated_files/pin_manager.h"/>
+        </manager>
+        <manager generated="false" name="System" reloadPin="manual">
+            <initializer comment="" name="Initialize">
+                <setting name="SCS" option="FOSC" register="OSCCON"/>
+                <setting name="SPLLEN" option="disabled" register="OSCCON"/>
+                <setting name="IRCF" option="16MHz_HF" register="OSCCON"/>
+                <setting name="LFIOFR" option="disabled" register="OSCSTAT"/>
+                <setting name="HFIOFL" option="not2percent_acc" register="OSCSTAT"/>
+                <setting name="OSTS" option="intosc" register="OSCSTAT"/>
+                <setting name="PLLR" option="disabled" register="OSCSTAT"/>
+                <setting name="HFIOFS" option="not0.5percent_acc" register="OSCSTAT"/>
+                <setting name="HFIOFR" option="disabled" register="OSCSTAT"/>
+                <setting name="MFIOFR" option="disabled" register="OSCSTAT"/>
+                <setting name="T1OSCR" option="disabled" register="OSCSTAT"/>
+                <setting name="TUN" option="0x0" register="OSCTUNE"/>
+                <additionalSetting name="pllMultiplier" option=""/>
+                <additionalSetting name="extclk" option="1.0 MHz"/>
+            </initializer>
+            <setting name="CLKOUTEN" option="OFF"/>
+            <setting name="FCMEN" option="ON"/>
+            <setting name="MCLRE" option="ON"/>
+            <setting name="WDTE" option="OFF"/>
+            <setting name="CPD" option="OFF"/>
+            <setting name="FOSC" option="INTOSC"/>
+            <setting name="BOREN" option="ON"/>
+            <setting name="IESO" option="ON"/>
+            <setting name="PWRTE" option="OFF"/>
+            <setting name="CP" option="OFF"/>
+            <setting name="PLLEN" option="ON"/>
+            <setting name="LVP" option="OFF"/>
+            <setting name="WRT" option="OFF"/>
+            <setting name="STVREN" option="ON"/>
+            <setting name="BORV" option="LO"/>
+            <setting name="generateConfigBits" option="true"/>
+            <file checksum="1354222743" modified="false" name="mcc.c" path="mcc_generated_files/mcc.c"/>
+            <file checksum="4129622788" modified="false" name="mcc.h" path="mcc_generated_files/mcc.h"/>
+        </manager>
+    </managers>
+    <modules>
+        <module generated="true" mode="DAC" name="DAC" order="0" reloadPin="auto" type="dac_5bit">
+            <initializer comment="" name="Initialize">
+                <setting name="DACOE" option="enabled" register="DACCON0"/>
+                <setting name="DACEN" option="enabled" register="DACCON0"/>
+                <setting name="DACLPS" option="neg_ref" register="DACCON0"/>
+                <setting name="DACNSS" option="VSS" register="DACCON0"/>
+                <setting name="DACPSS" option="VDD" register="DACCON0"/>
+                <setting name="DACR" option="0x0" register="DACCON1"/>
+            </initializer>
+            <file checksum="3272511766" modified="false" name="dac.c" path="mcc_generated_files/dac.c"/>
+            <file checksum="2148453432" modified="false" name="dac.h" path="mcc_generated_files/dac.h"/>
+        </module>
+        <module generated="false" mode="GPIO" name="GPIO" order="1" reloadPin="manual" type="GPIO"/>
+    </modules>
+</configuration>

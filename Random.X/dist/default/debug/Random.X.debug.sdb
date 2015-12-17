@@ -1,0 +1,175 @@
+[p LITE_MODE AUTOSTATIC PIC14 PIC14E ]
+[d version 1.1 ]
+[d edition pro ]
+[d chip 16F1826 ]
+[d frameptr 6 ]
+"6 /Applications/microchip/xc8/v1.35/sources/common/awdiv.c
+[v ___awdiv __awdiv `(i  1 e 2 0 ]
+"6 /Applications/microchip/xc8/v1.35/sources/common/awmod.c
+[v ___awmod __awmod `(i  1 e 2 0 ]
+"62 /Applications/microchip/xc8/v1.35/sources/common/float.c
+[v ___ftpack __ftpack `(f  1 e 3 0 ]
+"86 /Applications/microchip/xc8/v1.35/sources/common/ftadd.c
+[v ___ftadd __ftadd `(f  1 e 3 0 ]
+"6 /Applications/microchip/xc8/v1.35/sources/pic/eeprom.c
+[v _eecpymem eecpymem `(v  1 e 0 0 ]
+"24
+[v _memcpyee memcpyee `(v  1 e 0 0 ]
+"60 /Users/nicolasfarabegoli/MPLABXProjects/Random.X/main.c
+[v _main main `(v  1 e 0 0 ]
+"52 /Users/nicolasfarabegoli/MPLABXProjects/Random.X/mcc_generated_files/interrupt_manager.c
+[v _INTERRUPT_InterruptManager INTERRUPT_InterruptManager `II(v  1 e 0 0 ]
+"70 /Users/nicolasfarabegoli/MPLABXProjects/Random.X/mcc_generated_files/mcc.c
+[v _SYSTEM_Initialize SYSTEM_Initialize `(v  1 e 0 0 ]
+"76
+[v _OSCILLATOR_Initialize OSCILLATOR_Initialize `(v  1 e 0 0 ]
+"50 /Users/nicolasfarabegoli/MPLABXProjects/Random.X/mcc_generated_files/pin_manager.c
+[v _PIN_MANAGER_Initialize PIN_MANAGER_Initialize `(v  1 e 0 0 ]
+"64 /Users/nicolasfarabegoli/MPLABXProjects/Random.X/mcc_generated_files/tmr0.c
+[v _TMR0_Initialize TMR0_Initialize `(v  1 e 0 0 ]
+"101
+[v _TMR0_ISR TMR0_ISR `(v  1 e 0 0 ]
+[s S21 . 1 `uc 1 IOCIF 1 0 :1:0 
+`uc 1 INTF 1 0 :1:1 
+`uc 1 TMR0IF 1 0 :1:2 
+`uc 1 IOCIE 1 0 :1:3 
+`uc 1 INTE 1 0 :1:4 
+`uc 1 TMR0IE 1 0 :1:5 
+`uc 1 PEIE 1 0 :1:6 
+`uc 1 GIE 1 0 :1:7 
+]
+"360 /Applications/microchip/xc8/v1.35/include/pic16f1826.h
+[s S30 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 T0IF 1 0 :1:2 
+`uc 1 . 1 0 :2:3 
+`uc 1 T0IE 1 0 :1:5 
+]
+[u S35 . 1 `S21 1 . 1 0 `S30 1 . 1 0 ]
+[v _INTCONbits INTCONbits `VES35  1 e 1 @11 ]
+"475
+[v _PORTB PORTB `VEuc  1 e 1 @13 ]
+"641
+[v _TMR0 TMR0 `VEuc  1 e 1 @21 ]
+"1050
+[v _TRISA TRISA `VEuc  1 e 1 @140 ]
+"1111
+[v _TRISB TRISB `VEuc  1 e 1 @141 ]
+"1277
+[v _OPTION_REG OPTION_REG `VEuc  1 e 1 @149 ]
+[s S77 . 1 `uc 1 PS0 1 0 :1:0 
+`uc 1 PS1 1 0 :1:1 
+`uc 1 PS2 1 0 :1:2 
+`uc 1 PSA 1 0 :1:3 
+`uc 1 TMR0SE 1 0 :1:4 
+`uc 1 TMR0CS 1 0 :1:5 
+`uc 1 INTEDG 1 0 :1:6 
+`uc 1 nWPUEN 1 0 :1:7 
+]
+"1300
+[s S86 . 1 `uc 1 PS 1 0 :3:0 
+`uc 1 . 1 0 :1:3 
+`uc 1 T0SE 1 0 :1:4 
+`uc 1 T0CS 1 0 :1:5 
+]
+[u S91 . 1 `S77 1 . 1 0 `S86 1 . 1 0 ]
+[v _OPTION_REGbits OPTION_REGbits `VES91  1 e 1 @149 ]
+"1467
+[v _OSCTUNE OSCTUNE `VEuc  1 e 1 @152 ]
+"1524
+[v _OSCCON OSCCON `VEuc  1 e 1 @153 ]
+"1595
+[v _OSCSTAT OSCSTAT `VEuc  1 e 1 @154 ]
+"1850
+[v _LATA LATA `VEuc  1 e 1 @268 ]
+"1906
+[v _LATB LATB `VEuc  1 e 1 @269 ]
+"2577
+[v _APFCON0 APFCON0 `VEuc  1 e 1 @285 ]
+"2627
+[v _APFCON1 APFCON1 `VEuc  1 e 1 @286 ]
+"2646
+[v _ANSELA ANSELA `VEuc  1 e 1 @396 ]
+"2697
+[v _ANSELB ANSELB `VEuc  1 e 1 @397 ]
+"3254
+[v _WPUA WPUA `VEuc  1 e 1 @524 ]
+"3282
+[v _WPUB WPUB `VEuc  1 e 1 @525 ]
+"5531
+[v _LATA3 LATA3 `VEb  1 e 0 @2147 ]
+"5533
+[v _LATA4 LATA4 `VEb  1 e 0 @2148 ]
+"5675
+[v _RA2 RA2 `VEb  1 e 0 @98 ]
+"5677
+[v _RA3 RA3 `VEb  1 e 0 @99 ]
+"56 /Users/nicolasfarabegoli/MPLABXProjects/Random.X/main.c
+[v _Rand Rand `uc  1 e 1 0 ]
+[v _Rand_Disp Rand_Disp `uc  1 e 1 0 ]
+[v _Dec Dec `uc  1 e 1 0 ]
+[v _Uni Uni `uc  1 e 1 0 ]
+"57
+[v _LedTable LedTable `[16]uc  1 e 16 0 ]
+"58
+[v _Sleep Sleep `uc  1 e 1 0 ]
+"58 /Users/nicolasfarabegoli/MPLABXProjects/Random.X/mcc_generated_files/tmr0.c
+[v _timer0ReloadVal timer0ReloadVal `VEuc  1 e 1 0 ]
+"60 /Users/nicolasfarabegoli/MPLABXProjects/Random.X/main.c
+[v _main main `(v  1 e 0 0 ]
+{
+"129
+} 0
+"6 /Applications/microchip/xc8/v1.35/sources/common/awmod.c
+[v ___awmod __awmod `(i  1 e 2 0 ]
+{
+"11
+[v ___awmod@sign sign `uc  1 a 1 7 ]
+[v ___awmod@counter counter `uc  1 a 1 6 ]
+"6
+[v ___awmod@divisor divisor `i  1 p 2 1 ]
+[v ___awmod@dividend dividend `i  1 p 2 3 ]
+"35
+} 0
+"6 /Applications/microchip/xc8/v1.35/sources/common/awdiv.c
+[v ___awdiv __awdiv `(i  1 e 2 0 ]
+{
+"11
+[v ___awdiv@quotient quotient `i  1 a 2 8 ]
+"12
+[v ___awdiv@sign sign `uc  1 a 1 7 ]
+[v ___awdiv@counter counter `uc  1 a 1 6 ]
+"6
+[v ___awdiv@divisor divisor `i  1 p 2 1 ]
+[v ___awdiv@dividend dividend `i  1 p 2 3 ]
+"42
+} 0
+"70 /Users/nicolasfarabegoli/MPLABXProjects/Random.X/mcc_generated_files/mcc.c
+[v _SYSTEM_Initialize SYSTEM_Initialize `(v  1 e 0 0 ]
+{
+"74
+} 0
+"64 /Users/nicolasfarabegoli/MPLABXProjects/Random.X/mcc_generated_files/tmr0.c
+[v _TMR0_Initialize TMR0_Initialize `(v  1 e 0 0 ]
+{
+"81
+} 0
+"50 /Users/nicolasfarabegoli/MPLABXProjects/Random.X/mcc_generated_files/pin_manager.c
+[v _PIN_MANAGER_Initialize PIN_MANAGER_Initialize `(v  1 e 0 0 ]
+{
+"68
+} 0
+"76 /Users/nicolasfarabegoli/MPLABXProjects/Random.X/mcc_generated_files/mcc.c
+[v _OSCILLATOR_Initialize OSCILLATOR_Initialize `(v  1 e 0 0 ]
+{
+"85
+} 0
+"52 /Users/nicolasfarabegoli/MPLABXProjects/Random.X/mcc_generated_files/interrupt_manager.c
+[v _INTERRUPT_InterruptManager INTERRUPT_InterruptManager `II(v  1 e 0 0 ]
+{
+"59
+} 0
+"101 /Users/nicolasfarabegoli/MPLABXProjects/Random.X/mcc_generated_files/tmr0.c
+[v _TMR0_ISR TMR0_ISR `(v  1 e 0 0 ]
+{
+"110
+} 0
